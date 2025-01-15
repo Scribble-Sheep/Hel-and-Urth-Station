@@ -5,7 +5,7 @@
 /datum/martial_combo/krav_maga/leg_sweep/perform_combo(mob/living/carbon/human/user, mob/living/target, datum/martial_art/MA)
 	if(target.stat || target.IsWeakened())
 		return FALSE
-	if(!user.get_num_legs())
+	if(!user.get_num_legs() || HAS_TRAIT(user, TRAIT_PARAPLEGIC))
 		to_chat(user, "<span class='warning'>You suddenly notice you have no legs with which to sweep - how did that happen?!</span>")
 		return MARTIAL_COMBO_DONE_CLEAR_COMBOS
 	if(!target.get_num_legs())
