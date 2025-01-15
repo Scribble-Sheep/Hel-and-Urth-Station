@@ -1904,7 +1904,7 @@
 	// Wheelchair necessary?
 	var/obj/item/organ/external/l_foot = character.get_organ("l_foot")
 	var/obj/item/organ/external/r_foot = character.get_organ("r_foot")
-	if(!l_foot && !r_foot)
+	if(!l_foot && !r_foot || HAS_TRAIT(src, TRAIT_PARAPLEGIC))
 		var/obj/structure/chair/wheelchair/W = new /obj/structure/chair/wheelchair(character.loc)
 		W.buckle_mob(character, TRUE)
 	else if(!l_foot || !r_foot)
@@ -1988,6 +1988,10 @@
 	if(disabilities & DISABILITY_FLAG_WINGDINGS && (CAN_WINGDINGS in character.dna.species.species_traits))
 		character.dna.SetSEState(GLOB.wingdingsblock, TRUE, TRUE)
 		character.dna.default_blocks.Add(GLOB.wingdingsblock)
+
+	if(disabilities & DISABILITY_FLAG_PARAPLEGIC)
+		character.dna.SetSEState(GLOB.paraplegicblock, TRUE, TRUE)
+		character.dna.default_blocks.Add(GLOB.paraplegicblock)
 
 	character.dna.species.handle_dna(character)
 
